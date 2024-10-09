@@ -6,7 +6,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "src/styles/shared/variables.scss";`, // Import global SCSS variables
+        api: "modern-compiler",
       },
     },
   },
