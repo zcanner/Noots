@@ -1,0 +1,26 @@
+@use "./partials/variables";
+
+.bg-grad {
+  height: 100vh;
+  background: radial-gradient(
+      ellipse at top left,
+      rgba(variables.$primary-color, 0.5),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at top right,
+      rgba(variables.$secondary-color, 0.5),
+      transparent 40%
+    );
+}
+
+#hero-github:hover {
+  #hero-arrow {
+    fill: #{variables.$primary-color-hover};
+  }
+}
+
+#hero-arrow {
+  fill: variables.$text-color;
+  opacity: 70%;
+}

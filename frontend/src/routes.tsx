@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Bar } from "./lib/loadingBar/bar";
+import Home from "./pages/home.page.tsx";
+
 /**
  * Define the routes for the application.
  */
 const routes = [
   {
     path: "/",
-    element: <Bar />,
+    element: <Home />,
   },
 ];
 
