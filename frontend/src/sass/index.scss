@@ -1,0 +1,56 @@
+@use "./partials/variables";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+* {
+  font-family: variables.$font-family;
+  border-width: 0;
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  color: variables.$text-color;
+  border-color: variables.$border-color;
+  font-size: 16px;
+  font-weight: 400;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+html {
+  font-size: 100%;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: variables.$background-color;
+  color: #333;
+  // overflow: hidden;
+}
+
+h1 {
+  font-size: xx-large;
+  font-weight: 600;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70rem;
+  max-width: 90%;
+}
+
+.link {
+  color: variables.$primary-color;
+
+  &:hover {
+    color: #{variables.$primary-color-hover};
+  }
+}

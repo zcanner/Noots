@@ -1,0 +1,63 @@
+@use "../../sass/partials/variables";
+
+.nav {
+  position: fixed;
+  padding: 1.5rem 0rem;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-width: 1px;
+  border-color: transparent;
+  background-color: initial;
+  transition: all 0.25s ease-in-out;
+}
+
+.navScrolled {
+  border-bottom: 1px solid variables.$border-color;
+  padding: 1rem 0rem;
+  background-color: variables.$background-color;
+}
+
+.navLink {
+  &:hover {
+    color: #{variables.$primary-color-hover};
+  }
+}
+
+.navLogo {
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.headerMobileMenu {
+  pointer-events: auto;
+  background-color: variables.$background-color;
+  z-index: 10;
+}
+
+.navLinkMobile {
+  background-color: variables.$background-surface;
+
+  &:first-child {
+    background-color: variables.$primary-color;
+
+    &:hover {
+      background-color: variables.$primary-color-hover;
+    }
+  }
+
+  &:hover {
+    background-color: scale-color(
+      $color: variables.$background-surface,
+      $lightness: 15%
+    );
+  }
+}

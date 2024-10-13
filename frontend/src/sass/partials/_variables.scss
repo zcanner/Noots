@@ -1,0 +1,17 @@
+/* Typography */
+$font-family: "Poppins", sans-serif, "Arial", "Helvetica";
+$text-color: #eeeeee;
+$text-secondary-color: #a3a3a3;
+
+/* Background */
+$background-color: #171717;
+$background-surface: #222222;
+
+/* Border */
+$border-color: #313131;
+
+$primary-color: #7c3bed;
+$secondary-color: #f1a81e;
+// $tertiary-color: #f1a81e;
+
+$primary-color-hover: scale-color($primary-color, $lightness: 25%);
