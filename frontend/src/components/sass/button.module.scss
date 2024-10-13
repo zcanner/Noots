@@ -1,0 +1,16 @@
+@use "../../sass/partials/variables";
+
+@mixin btn {
+  font-weight: 500;
+  padding: 1rem 3rem;
+  border-radius: 10px;
+}
+
+.buttonPrimary {
+  @include btn;
+  background-color: #7c3aed;
+
+  &:hover {
+    background-color: #{variables.$primary-color-hover};
+  }
+}
