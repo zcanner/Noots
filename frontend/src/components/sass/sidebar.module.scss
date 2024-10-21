@@ -1,0 +1,35 @@
+@use "../../sass/partials/variables";
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  border-right: 1px solid variables.$border-color;
+  background-color: variables.$background-color;
+  scroll-behavior: auto;
+}
+
+.sideBarHeading {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: variables.$background-color;
+}
+
+.folders {
+  cursor: pointer;
+  padding: 0.3rem 0.3rem;
+  &:hover {
+    background-color: variables.$background-surface;
+    border-radius: 10px;
+  }
+
+}
+
+.files {
+  cursor: pointer;
+  &:hover {
+    background-color: variables.$background-surface;
+    border-radius: 10px;
+  }
+}
