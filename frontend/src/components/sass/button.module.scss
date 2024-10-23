@@ -2,15 +2,28 @@
 
 @mixin btn {
   font-weight: 500;
-  padding: 1rem 3rem;
-  border-radius: 10px;
+  padding: 0.7rem 2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .buttonPrimary {
   @include btn;
-  background-color: #7c3aed;
+  background-color: white;
+  color: black;
 
   &:hover {
     background-color: #{variables.$primary-color-hover};
+  }
+}
+
+.buttonSecondary {
+  @include btn;
+  background-color: transparent;
+  color: white;
+
+  &:hover {
+    background-color: variables.$secondary-color;
   }
 }

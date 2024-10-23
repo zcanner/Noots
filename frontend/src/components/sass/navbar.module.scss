@@ -48,6 +48,7 @@
 
   &:first-child {
     background-color: variables.$primary-color;
+    color: black;
 
     &:hover {
       background-color: variables.$primary-color-hover;

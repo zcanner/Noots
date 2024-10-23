@@ -1,8 +1,9 @@
 import style from "../components/sass/button.module.scss";
 import { ReactNode } from "react";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;
+  buttonType?: "primary" | "secondary";
 }
 
 /**
@@ -16,11 +17,26 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({
   children,
   className,
+  buttonType,
   ...props
 }: ButtonProps): JSX.Element {
+  let buttonStyle: string;
+
+  switch (buttonType) {
+    case "primary":
+      buttonStyle = style.buttonPrimary;
+      break;
+    case "secondary":
+      buttonStyle = style.buttonSecondary;
+      break;
+    default:
+      buttonStyle = style.buttonPrimary;
+      break;
+  }
+
   return (
-    <button className={`${style.buttonPrimary} ${className}`} {...props}>
+    <a className={`${buttonStyle} ${className}`} {...props}>
       {children}
-    </button>
+    </a>
   );
 }

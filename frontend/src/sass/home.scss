@@ -1,26 +1,61 @@
 @use "./partials/variables";
 
-.bg-grad {
-  height: 100vh;
-  background: radial-gradient(
-      ellipse at top left,
-      rgba(variables.$primary-color, 0.5),
-      transparent 40%
-    ),
-    radial-gradient(
-      ellipse at top right,
-      rgba(variables.$secondary-color, 0.5),
-      transparent 40%
-    );
-}
+// fade in on page load for hero section
+.main {
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
 
-#hero-github:hover {
-  #hero-arrow {
-    fill: #{variables.$primary-color-hover};
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
   }
 }
 
-#hero-arrow {
-  fill: variables.$text-color;
-  opacity: 70%;
+.heroheading {
+  font-weight: 600;
+  background: linear-gradient(90deg, #823aff, #ffb01d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  user-select: none;
+
+  animation: hueshift 7s linear 1s infinite;
+}
+
+@keyframes hueshift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.heroheadingPara {
+  text-wrap: balance;
+  text-wrap-mode: wrap;
+  text-wrap-style: balance;
+}
+
+.features {
+  background-color: variables.$background-surface;
+}
+
+.featurecard {
+  background-color: variables.$border-color;
+  opacity: 0.5;
+  transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+  .icon {
+    fill: initial;
+    opacity: 0.5;
+    transition: fill 0.3s ease-in-out, opacity 0.3s ease-in-out; // Transition for smooth effect
+  }
+
+  &:hover {
+    .icon {
+      opacity: 0.9;
+    }
+  }
 }

@@ -1,17 +1,21 @@
 /* Typography */
 $font-family: "Poppins", sans-serif, "Arial", "Helvetica";
-$text-color: #eeeeee;
+$text-color: #cacaca;
 $text-secondary-color: #a3a3a3;
 
 /* Background */
-$background-color: #171717;
-$background-surface: #222222;
+$background-color: #0c0c0c;
+$background-surface: #171717;
 
 /* Border */
 $border-color: #313131;
 
-$primary-color: #7c3bed;
-$secondary-color: #f1a81e;
+$primary-color: white;
+$secondary-color: #222222;
 // $tertiary-color: #f1a81e;
 
-$primary-color-hover: scale-color($primary-color, $lightness: 25%);
+$primary-color-hover: adjust-color(
+  $color: white,
+  $lightness: -15%,
+  $alpha: 1,
+);

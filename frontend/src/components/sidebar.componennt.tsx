@@ -6,8 +6,34 @@ import style from "./sass/sidebar.module.scss";
 import { useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
 
-function SideBar() {
-  const folders = {
+// Define the structure for a file
+interface FileContent {
+  title: string;
+  content: string;
+}
+
+// Define recursive type for nested folders
+interface FolderStructure {
+  [key: string]: FileContent | FolderStructure;
+}
+
+interface FolderItemProps {
+  name: string;
+  content: FolderStructure;
+  selectedItem: string;
+  onSelect: (key: string, type: "folder" | "file") => void;
+  openFolders: Set<string>;
+  path: string;
+}
+
+function isFileContent(
+  item: FileContent | FolderStructure
+): item is FileContent {
+  return (item as FileContent).title !== undefined;
+}
+
+function SideBar(): JSX.Element {
+  const folders: FolderStructure = {
     folder1: {
       file1: {
         title: "file1",
@@ -51,19 +77,8 @@ function SideBar() {
     folder3: {},
   };
 
-  // Lift the selected state up to the parent
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedItem, setSelectedItem] = useState<string>("");
   const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
-  console.log(selectedItem);
-
-  type FolderItemProps = {
-    name: string;
-    content: Record<string, any>;
-    selectedItem: string;
-    onSelect: (key: string, type: "folder" | "file") => void;
-    openFolders: Set<string>;
-    path: string;
-  };
 
   function FolderItem({
     name,
@@ -72,15 +87,15 @@ function SideBar() {
     onSelect,
     openFolders,
     path,
-  }: FolderItemProps) {
+  }: FolderItemProps): JSX.Element {
     const fullPath = path ? `${path}/${name}` : name;
     const isOpen = openFolders.has(fullPath);
 
     const handleClick = (
-      e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+      e: React.MouseEvent<HTMLDivElement>,
       key: string,
       type: "folder" | "file"
-    ) => {
+    ): void => {
       e.stopPropagation();
       onSelect(key, type);
     };
@@ -92,7 +107,7 @@ function SideBar() {
           className={`${style.folders} flex gap-2 items-center ${
             selectedItem === fullPath ? "bg-gray-200 bg-opacity-5" : ""
           }`}
-          onClick={(e) => handleClick(e, fullPath, "folder")}
+          onClick={(e): void => handleClick(e, fullPath, "folder")}
           style={{ cursor: "pointer" }}
         >
           <div>
@@ -106,7 +121,7 @@ function SideBar() {
           <div className="pl-2">
             {Object.entries(content).map(([key, item], index) => {
               const itemPath = `${fullPath}/${key}`;
-              if (typeof item === "object" && !item.hasOwnProperty("title")) {
+              if (!isFileContent(item)) {
                 return (
                   <FolderItem
                     key={index}
@@ -123,7 +138,7 @@ function SideBar() {
                   <div
                     data-key={itemPath}
                     key={key}
-                    onClick={(e) => handleClick(e, itemPath, "file")}
+                    onClick={(e): void => handleClick(e, itemPath, "file")}
                     className={`${
                       style.files
                     } px-2 py-1 flex gap-2 items-center ${
@@ -144,7 +159,7 @@ function SideBar() {
     );
   }
 
-  const handleSelect = (key: string, type: "folder" | "file") => {
+  const handleSelect = (key: string, type: "folder" | "file"): void => {
     setSelectedItem(key);
     if (type === "folder") {
       setOpenFolders((prev) => {
@@ -183,7 +198,7 @@ function SideBar() {
           <FolderItem
             key={index}
             name={folderName}
-            content={content}
+            content={content as FolderStructure}
             selectedItem={selectedItem}
             onSelect={handleSelect}
             openFolders={openFolders}

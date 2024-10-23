@@ -50,16 +50,16 @@ export default function Navbar(): JSX.Element {
 
   const navLinks = [
     {
-      name: "Home",
+      name: "Pricing",
       url: "/",
     },
     {
-      name: "About",
-      url: "/about",
+      name: "Get started",
+      url: "/",
     },
     {
-      name: "Account",
-      url: "/account",
+      name: "Useful links",
+      url: "/about",
     },
   ];
 
@@ -158,7 +158,7 @@ function ReusableHeaderNavbar({
   return (
     <nav className={`${style.nav} ${isScrollActive ? style.navScrolled : ""}`}>
       <div className="container">
-        <div className="flex text-opacity-60">
+        <div className="flex text-n-60">
           <div className="mr-auto">
             <Link className="flex items-center gap-2" to="/">
               <img
