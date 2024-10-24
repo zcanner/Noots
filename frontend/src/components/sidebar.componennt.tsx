@@ -1,30 +1,28 @@
 import { SlNotebook } from "react-icons/sl";
-import { FiFolderPlus } from "react-icons/fi";
+import { FiFilePlus, FiFolderPlus } from "react-icons/fi";
 import { FaFolder } from "react-icons/fa";
 import { FaFile } from "react-icons/fa6";
 import style from "./sass/sidebar.module.scss";
 import { useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
 
-// Define the structure for a file
-interface FileContent {
+type FileContent = {
   title: string;
   content: string;
-}
+};
 
-// Define recursive type for nested folders
-interface FolderStructure {
+type FolderStructure = {
   [key: string]: FileContent | FolderStructure;
-}
+};
 
-interface FolderItemProps {
+type FolderItemProps = {
   name: string;
   content: FolderStructure;
   selectedItem: string;
   onSelect: (key: string, type: "folder" | "file") => void;
   openFolders: Set<string>;
   path: string;
-}
+};
 
 function isFileContent(
   item: FileContent | FolderStructure
@@ -76,6 +74,28 @@ function SideBar(): JSX.Element {
     },
     folder3: {},
   };
+
+  function sortFolderStructure(
+    folderStructure: FolderStructure
+  ): FolderStructure {
+    const sortedEntries = Object.entries(folderStructure).sort(
+      ([keyA, valueA], [keyB, valueB]) => {
+        const isFileA = isFileContent(valueA);
+        const isFileB = isFileContent(valueB);
+
+        if (isFileA && !isFileB) return 1;
+        if (!isFileA && isFileB) return -1;
+        return keyA.localeCompare(keyB);
+      }
+    );
+
+    return sortedEntries.reduce((acc, [key, value]) => {
+      acc[key] = isFileContent(value) ? value : sortFolderStructure(value);
+      return acc;
+    }, {} as FolderStructure);
+  }
+
+  const sortedFolders = sortFolderStructure(folders);
 
   const [selectedItem, setSelectedItem] = useState<string>("");
   const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
@@ -188,13 +208,18 @@ function SideBar(): JSX.Element {
               <span>Notes</span>
             </div>
             <div>
-              <button className="btn btn-primary">
+              <div className="hover:bg-gray-300 hover:bg-opacity-15 cursor-pointer p-1 rounded-full">
                 <FiFolderPlus />
-              </button>
+              </div>
+            </div>
+            <div>
+              <div className="hover:bg-gray-300 hover:bg-opacity-15 cursor-pointer p-1 rounded-full">
+                <FiFilePlus />
+              </div>
             </div>
           </div>
         </h3>
-        {Object.entries(folders).map(([folderName, content], index) => (
+        {Object.entries(sortedFolders).map(([folderName, content], index) => (
           <FolderItem
             key={index}
             name={folderName}
